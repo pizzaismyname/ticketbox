@@ -7,7 +7,7 @@ return array(
         'apiControllerNamespace' => '',
         'className' => 'Its\Example\Dashboard\Module',
         'path' => APP_PATH . '/modules/dashboard/Module.php',
-        'defaultRouting' => true,
+        'defaultRouting' => false,
         'defaultController' => 'index',
         'defaultAction' => 'index'
     ],

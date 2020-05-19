@@ -15,14 +15,20 @@ class Module implements ModuleDefinitionInterface
         $loader->registerNamespaces([
 
             'Its\Example\Dashboard\Core\Domain\Event' => __DIR__ . '/Core/Domain/Event',
+            'Its\Example\Dashboard\Core\Domain\Exception' => __DIR__ . '/Core/Domain/Exception',
+            'Its\Example\Dashboard\Core\Domain\Interfaces' => __DIR__ . '/Core/Domain/Interfaces',
             'Its\Example\Dashboard\Core\Domain\Model' => __DIR__ . '/Core/Domain/Model',
             'Its\Example\Dashboard\Core\Domain\Repository' => __DIR__ . '/Core/Domain/Repository',
             'Its\Example\Dashboard\Core\Domain\Service' => __DIR__ . '/Core/Domain/Service',
 
+            'Its\Example\Dashboard\Core\Application\Request' => __DIR__ . '/Core/Application/Request',
+            'Its\Example\Dashboard\Core\Application\Response' => __DIR__ . '/Core/Application/Response',
             'Its\Example\Dashboard\Core\Application\Service' => __DIR__ . '/Core/Application/Service',
             'Its\Example\Dashboard\Core\Application\EventSubscriber' => __DIR__ . '/Core/Application/EventSubscriber',
 
-            'Its\Example\Dashboard\Infrastructure\Persistence' => __DIR__ . '/Core/Infrastructure/Persistence',
+            'Its\Example\Dashboard\Infrastructure\Persistence\Repository' => __DIR__ . '/Infrastructure/Persistence/Repository',
+            'Its\Example\Dashboard\Infrastructure\Persistence\Record' => __DIR__ . '/Infrastructure/Persistence/Record',
+            'Its\Example\Dashboard\Infrastructure\Persistence\Mapper' => __DIR__ . '/Infrastructure/Persistence/Mapper',
 
             'Its\Example\Dashboard\Presentation\Web\Controller' => __DIR__ . '/Presentation/Web/Controller',
             'Its\Example\Dashboard\Presentation\Web\Validator' => __DIR__ . '/Presentation/Web/Validator',

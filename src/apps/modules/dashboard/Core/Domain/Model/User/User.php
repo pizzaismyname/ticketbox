@@ -19,15 +19,11 @@ class User
         return new User(UserID::generate(), new Username($username), Password::createFromString($password), 0, 0);
     }
 
-    public function __construct(UserID $id, Username $username, Password $password, int $following_count, int $follower_count)
+    public function __construct(UserID $id, Username $username, Password $password)
     {
         $this->id = $id;
         $this->username = $username;
         $this->password = $password;
-        $this->following_count = $following_count;
-        $this->follower_count = $follower_count;
-
-        $this->following = new WatchableList(UserID::class);
     }
 
     public function __get($name)
@@ -50,7 +46,7 @@ class User
     public function changePassword(string $old_password, Password $new_password)
     {
         assert($this->password->testAgainst($old_password), new WrongPasswordException);
-        
+
         $this->password = $new_password;
     }
 }
