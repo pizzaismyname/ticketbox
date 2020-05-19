@@ -1,87 +1,69 @@
 <?php
 
-use Phalcon\Session\Adapter\Files as Session;
+use Phalcon\Session\Manager as SessionManager;
+use Phalcon\Session\Adapter\Stream as Session;
 use Phalcon\Security;
 use Phalcon\Mvc\Dispatcher;
-use Phalcon\Events\Event;
-use Phalcon\Events\Manager;
 use Phalcon\Mvc\View;
-use Phalcon\Mvc\ViewBaseInterface;
-use Phalcon\Mvc\View\Engine\Volt;
 use Phalcon\Flash\Direct as FlashDirect;
 use Phalcon\Flash\Session as FlashSession;
+use Phalcon\Escaper;
 
-$container['config'] = function() use ($config) {
-	return $config;
+$di['config'] = function () use ($config) {
+    return $config;
 };
 
-$container->setShared('session', function() {
-    $session = new Session();
-	$session->start();
+$di->setShared('session', function () {
+    $session = new SessionManager();
+    $files = new Session(
+        [
+            'savePath' => '/tmp',
+        ]
+    );
+    $session
+        ->setAdapter($files)
+        ->start();
 
-	return $session;
+    return $session;
 });
 
-$container['dispatcher'] = function() {
+$di['dispatcher'] = function () use ($di, $defaultModule) {
 
-    $eventsManager = new Manager();
-
-    $eventsManager->attach(
-        'dispatch:beforeException',
-        function (Event $event, $dispatcher, Exception $exception) {
-            // 404
-            if ($exception instanceof DispatchException) {
-                $dispatcher->forward(
-                    [
-                        'controller' => 'index',
-                        'action'     => 'fourOhFour',
-                    ]
-                );
-
-                return false;
-            }
-        }
-    );
-
+    $eventsManager = $di->getShared('eventsManager');
     $dispatcher = new Dispatcher();
     $dispatcher->setEventsManager($eventsManager);
 
     return $dispatcher;
 };
 
-$container['url'] = function() use ($config) {
-	$url = new \Phalcon\Url();
+$di['url'] = function () use ($config, $di) {
+    $url = new \Phalcon\Url();
 
     $url->setBaseUri($config->url['baseUrl']);
 
-	return $url;
+    return $url;
 };
 
-$container['voltService'] = function (ViewBaseInterface $view) use ($container, $config) {
-    
-    $volt = new Volt($view, $container);
-
+$di['voltService'] = function (\Phalcon\Mvc\ViewBaseInterface $view) use ($di, $config) {
+    $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
     if (!is_dir($config->application->cacheDir)) {
         mkdir($config->application->cacheDir);
     }
 
     $compileAlways = $config->mode == 'DEVELOPMENT' ? true : false;
 
-    $volt->setOptions(
-        [
-            'always'    => $compileAlways,
-            'extension' => '.php',
-            'separator' => '_',
-            'stat'      => true,
-            'path'      => $config->application->cacheDir,
-            'prefix'    => '-prefix-',
-        ]
-    );
-    
+    $volt->setOptions(array(
+        'always'    => $compileAlways,
+        'extension' => '.php',
+        'separator' => '_',
+        'stat'      => true,
+        'path'      => $config->application->cacheDir,
+        'prefix'    => '-prefix-',
+    ));
     return $volt;
 };
 
-$container['view'] = function () {
+$di['view'] = function () {
     $view = new View();
     $view->setViewsDir(APP_PATH . '/common/views/');
 
@@ -94,7 +76,7 @@ $container['view'] = function () {
     return $view;
 };
 
-$container->set(
+$di->set(
     'security',
     function () {
         $security = new Security();
@@ -105,10 +87,12 @@ $container->set(
     true
 );
 
-$container->set(
+$di->set(
     'flash',
     function () {
-        $flash = new FlashDirect(
+        $escaper = new Escaper();
+        $flash = new FlashDirect($escaper);
+        $flash->setCssClasses(
             [
                 'error'   => 'alert alert-danger',
                 'success' => 'alert alert-success',
@@ -121,10 +105,12 @@ $container->set(
     }
 );
 
-$container->set(
+$di->set(
     'flashSession',
     function () {
-        $flash = new FlashSession(
+        $escaper = new Escaper();
+        $flash = new FlashSession($escaper);
+        $flash->setCssClasses(
             [
                 'error'   => 'alert alert-danger',
                 'success' => 'alert alert-success',
@@ -134,19 +120,7 @@ $container->set(
         );
 
         $flash->setAutoescape(false);
-        
+
         return $flash;
     }
 );
-
-$container['db'] = function () use ($config) {
-
-    $dbAdapter = $config->database->adapter;
-
-    return new $dbAdapter([
-        "host" => $config->database->host,
-        "username" => $config->database->username,
-        "password" => $config->database->password,
-        "dbname" => $config->database->dbname
-    ]);
-};
