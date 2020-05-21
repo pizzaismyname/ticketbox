@@ -1,8 +1,6 @@
 <?php
 
-namespace Its\Example\Dashboard\Core\Domain\Model\User;
-
-use Its\Example\Dashboard\Core\Domain\Exception\UsernameAssertionError;
+namespace Its\Example\Dashboard\Core\Domain\Model\Committee;
 
 class Username
 {
@@ -10,8 +8,6 @@ class Username
 
     public function __construct(string $username)
     {
-        assert((strlen($username) <= 15 && ctype_alnum($username)), new UsernameAssertionError);
-
         $this->username = $username;
     }
 

@@ -4,7 +4,7 @@ namespace Its\Example\Dashboard\Infrastructure\Persistence\Record;
 
 use Phalcon\Mvc\Model;
 
-class UserRecord extends Model
+class CommitteeRecord extends Model
 {
     public $id;
     public $username;
@@ -13,6 +13,6 @@ class UserRecord extends Model
     public function initialize()
     {
         $this->setConnectionService('db');
-        $this->setSource('users');
+        $this->setSource('committees');
     }
 }

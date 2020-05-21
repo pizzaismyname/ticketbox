@@ -1,7 +1,7 @@
 {% extends "layouts/base.volt" %}
 
 {% block content %}
-	<h1>Panitia Login Page</h1>
+	<h1>Committee Login</h1>
 	<form method="POST" action="/login">
 		<div class="form-group">
 			<input type="username" class="form-control" name="username" placeholder="username">

@@ -8,7 +8,7 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        $this->view->setVar('user_info', $this->session->get('user_info'));
+        $this->view->setVar('committee_info', $this->session->get('committee_info'));
         $this->view->pick('index/index');
     }
 }

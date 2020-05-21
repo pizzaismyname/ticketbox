@@ -1,6 +1,6 @@
 <?php
 
-namespace Its\Example\Dashboard\Core\Domain\Model\User;
+namespace Its\Example\Dashboard\Core\Domain\Model\Committee;
 
 class Password
 {

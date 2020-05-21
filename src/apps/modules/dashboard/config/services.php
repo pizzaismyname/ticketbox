@@ -1,7 +1,7 @@
 <?php
 
 use Its\Example\Dashboard\Core\Application\Service\LoginService;
-use Its\Example\Dashboard\Infrastructure\Persistence\Repository\UserRepository;
+use Its\Example\Dashboard\Infrastructure\Persistence\Repository\CommitteeRepository;
 use Phalcon\Di\DiInterface;
 use Phalcon\Mvc\View;
 
@@ -19,10 +19,10 @@ $di['view'] = function () {
     return $view;
 };
 
-$di->set('userRepository', function () use ($di) {
-    return new UserRepository($di);
+$di->set('committeeRepository', function () use ($di) {
+    return new CommitteeRepository($di);
 });
 
 $di->set('loginService', function () use ($di) {
-    return new LoginService($di->get('userRepository'));
+    return new LoginService($di->get('committeeRepository'));
 });

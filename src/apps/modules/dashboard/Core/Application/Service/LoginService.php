@@ -3,21 +3,21 @@
 namespace Its\Example\Dashboard\Core\Application\Service;
 
 use Its\Example\Dashboard\Core\Application\Request\LoginRequest;
-use Its\Example\Dashboard\Core\Application\Response\UserInfo;
-use Its\Example\Dashboard\Core\Domain\Interfaces\IUserRepository;
+use Its\Example\Dashboard\Core\Application\Response\CommitteeInfo;
+use Its\Example\Dashboard\Core\Domain\Interfaces\ICommitteeRepository;
 
 class LoginService
 {
-    protected $user_repo;
+    protected $committee_repo;
 
-    public function __construct(IUserRepository $user_repo)
+    public function __construct(ICommitteeRepository $committee_repo)
     {
-        $this->user_repo = $user_repo;
+        $this->committee_repo = $committee_repo;
     }
 
-    public function execute(LoginRequest $request): UserInfo
+    public function execute(LoginRequest $request): CommitteeInfo
     {
-        $user = $this->user_repo->findByUserPass($request->username, $request->password);
-        return new UserInfo($user);
+        $committee = $this->committee_repo->findByCommitteePass($request->username, $request->password);
+        return new CommitteeInfo($committee);
     }
 }

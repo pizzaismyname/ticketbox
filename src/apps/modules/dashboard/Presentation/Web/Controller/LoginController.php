@@ -23,8 +23,8 @@ class LoginController extends Controller
             $request->username = $this->request->getPost('username');
             $request->password = $this->request->getPost('password');
 
-            $user_info = $this->login_service->execute($request);
-            $this->session->set('user_info', $user_info);
+            $committee_info = $this->login_service->execute($request);
+            $this->session->set('committee_info', $committee_info);
             $this->response->redirect('/');
         }
         $this->view->pick('login/index');
