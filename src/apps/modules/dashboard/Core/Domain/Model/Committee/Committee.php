@@ -37,4 +37,16 @@ class Committee
                 return $this->password;
         }
     }
+
+    public function changeUsername(Username $username)
+    {
+        $this->username = $username;
+    }
+
+    public function changePassword(string $old_password, Password $new_password)
+    {
+        assert($this->password->testAgainst($old_password), new WrongPasswordException);
+
+        $this->password = $new_password;
+    }
 }

@@ -19,6 +19,16 @@ $di['view'] = function () {
     return $view;
 };
 
+$di->set('db', function () {
+    $adapter = getenv('DB_ADAPTER');
+    return new $adapter([
+        'host'     => getenv('DB_HOST'),
+        'username' => getenv('DB_USERNAME'),
+        'password' => getenv('DB_PASSWORD'),
+        'dbname'   => getenv('DB_NAME'),
+    ]);
+});
+
 $di->set('committeeRepository', function () use ($di) {
     return new CommitteeRepository($di);
 });

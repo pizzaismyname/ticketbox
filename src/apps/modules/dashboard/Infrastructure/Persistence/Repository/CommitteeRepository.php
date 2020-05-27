@@ -51,7 +51,7 @@ class CommitteeRepository implements ICommitteeRepository
         return $committee;
     }
 
-    public function create(Committee $committee)
+    public function persist(Committee $committee)
     {
         $committee_record = CommitteeMapper::toCommitteeRecord($committee);
         $committee_record->save();
