@@ -56,3 +56,15 @@ $di->set('editCommitteeService', function () use ($di) {
 $di->set('deleteCommitteeService', function () use ($di) {
     return new DeleteCommitteeService($di->get('committeeRepository'));
 });
+
+$di->set('createTicketCategoryService', function () use ($di) {
+    return new CreateTicketCategoryService($di->get('ticketCategoryRepository'));
+});
+
+$di->set('editTicketCategoryService', function () use ($di) {
+    return new EditTicketCategoryService($di->get('ticketCategoryRepository'));
+});
+
+$di->set('deleteTicketCategoryService', function () use ($di) {
+    return new DeleteTicketCategoryService($di->get('ticketCategoryRepository'));
+});
