@@ -18,6 +18,11 @@ class TicketCategory
     protected $total_amount;
     protected $remaining_amount;
 
+    public static function create(string $type, string $price, int $total_amount): TicketCategory
+    {
+        return new TicketCategory(TicketCategoryID::generate(), new Type($type), new Price($price), new TotalAmount($total_amount), new RemainingAmount($total_amount));
+    }
+
     public function __construct(TicketCategoryID $id, Type $type, Price $price, TotalAmount $total_amount, RemainingAmount $remaining_amount)
     {
         $this->id = $id;
@@ -41,6 +46,21 @@ class TicketCategory
             case 'remaining_amount':
                 return $this->remaining_amount;
         }
+    }
+
+    public function changeType(Type $type)
+    {
+        $this->type = $type;
+    }
+
+    public function changePrice(Price $price)
+    {
+        $this->price = $price;
+    }
+
+    public function changeTotalAmount(TotalAmount $total_amount)
+    {
+        $this->total_amount = $total_amount;
     }
 
     public function generateTicket()

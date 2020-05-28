@@ -16,7 +16,7 @@ class Committee
 
     public static function create(string $username, string $password): Committee
     {
-        return new Committee(CommitteeID::generate(), new Username($username), Password::createFromString($password), 0, 0);
+        return new Committee(CommitteeID::generate(), new Username($username), Password::createFromString($password));
     }
 
     public function __construct(CommitteeID $id, Username $username, Password $password)
