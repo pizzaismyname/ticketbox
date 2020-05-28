@@ -3,8 +3,8 @@
 namespace Its\Example\Dashboard\Core\Domain\Model\TicketCategory;
 
 /**
- * @property-read CategoryID $id
- * @property-read CategoryName $category_name
+ * @property-read TicketCategoryID $id
+ * @property-read Type $type
  * @property-read Price $price
  * @property-read TotalAmount $total_amount
  * @property-read RemainingAmount $remaining_amount
@@ -13,27 +13,27 @@ namespace Its\Example\Dashboard\Core\Domain\Model\TicketCategory;
 class TicketCategory
 {
     protected $id;
-    protected $category_name;
+    protected $type;
     protected $price;
     protected $total_amount;
     protected $remaining_amount;
 
-    public function __construct(CategoryID $id, CategoryName $category_name, Price $price, AmountTicket $total_amount, RemainingTicket $remaining_amount)
+    public function __construct(TicketCategoryID $id, Type $type, Price $price, TotalAmount $total_amount, RemainingAmount $remaining_amount)
     {
         $this->id = $id;
-        $this->category_name = $category_name;
+        $this->type = $type;
         $this->price = $price;
         $this->total_amount = $total_amount;
         $this->remaining_amount = $remaining_amount;
     }
 
-    public function __get($name)
+    public function __get($type)
     {
-        switch ($name) {
+        switch ($type) {
             case 'id':
                 return $this->id;
-            case 'category_name':
-                return $this->category_name;
+            case 'type':
+                return $this->type;
             case 'price':
                 return $this->price;
             case 'total_amount':
