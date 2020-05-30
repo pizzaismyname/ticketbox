@@ -22,6 +22,7 @@ class CommitteeRepository implements ICommitteeRepository
 
     public function find(CommitteeID $committee_id): Committee
     {
+        /** @var CommitteeRecord */
         $committee_record = CommitteeRecord::findFirst([
             'conditions' => 'id = :id:',
             'bind' => [

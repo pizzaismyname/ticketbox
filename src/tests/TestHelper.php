@@ -2,6 +2,7 @@
 
 use Its\Example\Dashboard\Infrastructure\Persistence\Repository\CommitteeRepository;
 use Its\Example\Dashboard\Infrastructure\Persistence\Repository\TicketCategoryRepository;
+use Its\Example\Dashboard\Infrastructure\Persistence\Repository\ReservationRepository;
 use Phalcon\Di;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
@@ -39,6 +40,7 @@ $loader->registerNamespaces([
     'Its\Example\Dashboard\Core\Domain\Exception' => APP_PATH . '/modules/dashboard/Core/Domain/Exception',
     'Its\Example\Dashboard\Core\Domain\Model\Committee' => APP_PATH . '/modules/dashboard/Core/Domain/Model/Committee',
     'Its\Example\Dashboard\Core\Domain\Model\TicketCategory' => APP_PATH . '/modules/dashboard/Core/Domain/Model/TicketCategory',
+    'Its\Example\Dashboard\Core\Domain\Model\Reservation' => APP_PATH . '/modules/dashboard/Core/Domain/Model/Reservation',
     'Its\Example\Dashboard\Core\Domain\Interfaces' => APP_PATH . '/modules/dashboard/Core/Domain/Interfaces',
 
     'Its\Example\Dashboard\Infrastructure\Persistence\Mapper' => APP_PATH . '/modules/dashboard/Infrastructure/Persistence/Mapper',
@@ -70,6 +72,10 @@ $di->set('committeeRepository', function() use ($di) {
 
 $di->set('ticketCategoryRepository', function() use ($di) {
     return new TicketCategoryRepository($di);
+});
+
+$di->set('reservationRepository', function() use ($di) {
+    return new ReservationRepository($di);
 });
 
 Di::setDefault($di);

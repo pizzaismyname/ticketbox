@@ -30,7 +30,7 @@ class TicketCategoryMapper
             new Type($ticket_category_record->type),
             new Price($ticket_category_record->price),
             new TotalAmount($ticket_category_record->total_amount),
-            new RemainingAmount($ticket_category_record->tickets->count())
+            new RemainingAmount($ticket_category_record->total_amount-$ticket_category_record->tickets->count())
         );
     }
 }

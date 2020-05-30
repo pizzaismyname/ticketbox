@@ -4,23 +4,25 @@ namespace Its\Example\Dashboard\Infrastructure\Persistence\Record;
 
 use Phalcon\Mvc\Model;
 
-class CommitteeRecord extends Model
+class ReservationRecord extends Model
 {
     public $id;
-    public $username;
-    public $password_hash;
+    public $status;
+    public $customer_name;
+    public $customer_email;
+    public $id_committee;
 
     public function initialize()
     {
         $this->setConnectionService('db');
-        $this->setSource('committees');
+        $this->setSource('reservations');
 
         $this->hasMany(
             'id',
-            ReservationRecord::class,
-            'id_committee',
+            TicketRecord::class,
+            'id_reservation',
             [
-                'alias' => 'reservations'
+                'alias' => 'tickets'
             ]
         );
     }

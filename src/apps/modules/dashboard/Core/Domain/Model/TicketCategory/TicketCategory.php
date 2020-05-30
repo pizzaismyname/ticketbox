@@ -2,6 +2,9 @@
 
 namespace Its\Example\Dashboard\Core\Domain\Model\TicketCategory;
 
+use Its\Example\Dashboard\Core\Domain\Model\Reservation\Ticket;
+use Its\Example\Dashboard\Core\Domain\Model\Reservation\TicketCode;
+
 /**
  * @property-read TicketCategoryID $id
  * @property-read Type $type
@@ -32,9 +35,9 @@ class TicketCategory
         $this->remaining_amount = $remaining_amount;
     }
 
-    public function __get($type)
+    public function __get($name)
     {
-        switch ($type) {
+        switch ($name) {
             case 'id':
                 return $this->id;
             case 'type':
@@ -63,9 +66,14 @@ class TicketCategory
         $this->total_amount = $total_amount;
     }
 
+    public function isZero()
+    {
+        return $this->remaining_amount == new RemainingAmount(0);
+    }
+
     public function generateTicket()
     {
-        // Ketika melakukan pemesanan
-        // Cek ketersediaan tiket
+        $this->remaining_amount--;
+        return Ticket::create(TicketCode::generate(), $this->id);
     }
 }

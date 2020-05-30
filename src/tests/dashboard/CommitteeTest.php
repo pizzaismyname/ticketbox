@@ -18,14 +18,14 @@ class CommitteeTest extends TestCase
 
     public function testCanBeInstantiated()
     {
-        $committee = new Committee(new CommitteeID(Uuid::uuid4()->toString()), new Username("validusername"), Password::createFromString("anypassword"));
+        $committee = new Committee(new CommitteeID(Uuid::uuid4()->toString()), new Username("testusername"), Password::createFromString("anypassword"));
 
         $this->assertInstanceOf(Committee::class, $committee);
     }
 
     public function testPasswordCanBeChanged()
     {
-        $committee = new Committee(CommitteeID::generate(), new Username("validusername"), Password::createFromString("anypassword"));
+        $committee = new Committee(CommitteeID::generate(), new Username("testusername"), Password::createFromString("anypassword"));
 
         $committee->changePassword("anypassword", Password::createFromString("anotherpassword"));
 

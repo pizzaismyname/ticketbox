@@ -21,7 +21,7 @@ class TicketCategoryRepository implements ITicketCategoryRepository
 
     public function find(TicketCategoryID $ticket_category_id): TicketCategory
     {
-        /** @var CommitteeRecord */
+        /** @var TicketCategoryRecord */
         $ticket_category_record = TicketCategoryRecord::findFirst([
             'conditions' => 'id = :id:',
             'bind' => [
