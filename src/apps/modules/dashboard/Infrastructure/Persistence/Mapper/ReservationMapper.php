@@ -24,7 +24,6 @@ class ReservationMapper
         $reservation_record->status = $reservation->status;
         $reservation_record->customer_name = $reservation->customer->name->getString();
         $reservation_record->customer_email = $reservation->customer->email->getString();
-        // MASIH RAGU
         if ($reservation->committee == NULL) {
             $reservation_record->id_committee = NULL;
         } else {
