@@ -9,6 +9,7 @@ interface ICommitteeRepository
 {
     public function find(CommitteeID $committee_id): Committee;
     public function findByCommitteePass(string $username, string $password): Committee;
+    public function all();
     public function persist(Committee $committee);
     public function delete(Committee $committee);
 }

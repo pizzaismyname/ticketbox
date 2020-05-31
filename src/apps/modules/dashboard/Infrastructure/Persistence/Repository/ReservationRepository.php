@@ -37,6 +37,18 @@ class ReservationRepository implements IReservationRepository
         return ReservationMapper::toModel($reservation_record, $this->committee_repo);
     }
 
+    public function all(): array
+    {
+        $reservation_records = ReservationRecord::find();
+
+        $reservations = [];
+        foreach ($reservation_records as $reservation_record) {
+            $reservations[] = ReservationMapper::toModel($reservation_record, $this->committee_repo);
+        }
+
+        return $reservations;
+    }
+
     public function persist(Reservation $reservation)
     {
         $reservation_record = ReservationMapper::toReservationRecord($reservation);

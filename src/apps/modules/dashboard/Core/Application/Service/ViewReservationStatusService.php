@@ -18,7 +18,7 @@ class ViewReservationStatusService
     }
 
     /** @return TicketInfo[] */
-    public function execute(ViewReservationStatusRequest $request): array
+    public function execute(ViewReservationStatusRequest $request): ?array
     {
         $reservation = $this->reservation_repo->find(new ReservationID($request->reservation_id));
         if ($reservation->status == Reservation::STAT_PENDING) {
@@ -26,8 +26,7 @@ class ViewReservationStatusService
         } elseif ($reservation->status == Reservation::STAT_VERIFIED) {
             $tickets = [];
             foreach ($reservation->tickets as $ticket) {
-                $ticket_info = new TicketInfo();
-                $ticket_info->ticket_code = $ticket->getString();
+                $ticket_info = new TicketInfo($ticket);
                 $tickets[] = $ticket_info;
             }
             return $tickets;

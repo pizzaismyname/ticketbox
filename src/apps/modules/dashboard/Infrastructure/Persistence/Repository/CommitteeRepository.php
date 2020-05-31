@@ -52,6 +52,18 @@ class CommitteeRepository implements ICommitteeRepository
         return $committee;
     }
 
+    public function all(): array
+    {
+        $committee_records = CommitteeRecord::find();
+
+        $committees = [];
+        foreach ($committee_records as $committee_record) {
+            $committees[] = CommitteeMapper::toModel($committee_record, $this->committee_repo);
+        }
+
+        return $committees;
+    }
+
     public function persist(Committee $committee)
     {
         $committee_record = CommitteeMapper::toCommitteeRecord($committee);

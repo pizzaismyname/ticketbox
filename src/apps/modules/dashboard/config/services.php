@@ -1,15 +1,18 @@
 <?php
 
 use Its\Example\Dashboard\Core\Application\Service\LoginService;
+use Its\Example\Dashboard\Core\Application\Service\ListCommitteeService;
 use Its\Example\Dashboard\Core\Application\Service\CreateCommitteeService;
 use Its\Example\Dashboard\Core\Application\Service\EditCommitteeService;
 use Its\Example\Dashboard\Core\Application\Service\DeleteCommitteeService;
+use Its\Example\Dashboard\Core\Application\Service\ViewCommitteeService;
 use Its\Example\Dashboard\Core\Application\Service\CreateTicketCategoryService;
 use Its\Example\Dashboard\Core\Application\Service\ListTicketCategoryService;
 use Its\Example\Dashboard\Core\Application\Service\EditTicketCategoryService;
 use Its\Example\Dashboard\Core\Application\Service\DeleteTicketCategoryService;
 use Its\Example\Dashboard\Core\Application\Service\ViewTicketCategoryService;
 use Its\Example\Dashboard\Core\Application\Service\CreateReservationService;
+use Its\Example\Dashboard\Core\Application\Service\ListReservationService;
 use Its\Example\Dashboard\Core\Application\Service\DeleteReservationService;
 use Its\Example\Dashboard\Core\Application\Service\VerifyReservationService;
 use Its\Example\Dashboard\Core\Application\Service\ViewReservationStatusService;
@@ -63,12 +66,20 @@ $di->set('createCommitteeService', function () use ($di) {
     return new CreateCommitteeService($di->get('committeeRepository'));
 });
 
+$di->set('listCommitteeService', function () use ($di) {
+    return new ListCommitteeService($di->get('committeeRepository'));
+});
+
 $di->set('editCommitteeService', function () use ($di) {
     return new EditCommitteeService($di->get('committeeRepository'));
 });
 
 $di->set('deleteCommitteeService', function () use ($di) {
     return new DeleteCommitteeService($di->get('committeeRepository'));
+});
+
+$di->set('viewCommitteeService', function () use ($di) {
+    return new ViewCommitteeService($di->get('committeeRepository'));
 });
 
 $di->set('createTicketCategoryService', function () use ($di) {
@@ -95,11 +106,15 @@ $di->set('createReservationService', function () use ($di) {
     return new CreateReservationService($di->get('reservationRepository'), $di->get('ticketCategoryRepository'));
 });
 
+$di->set('listReservationService', function () use ($di) {
+    return new ListReservationService($di->get('reservationRepository'), $di->get('committeeRepository'));
+});
+
 $di->set('deleteReservationService', function () use ($di) {
     return new DeleteReservationService($di->get('reservationRepository'));
 });
 
-$di->set('createReservationService', function () use ($di) {
+$di->set('verifyReservationService', function () use ($di) {
     return new VerifyReservationService($di->get('reservationRepository'), $di->get('committeeRepository'));
 });
 

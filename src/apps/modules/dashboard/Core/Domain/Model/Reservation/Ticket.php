@@ -25,8 +25,18 @@ class Ticket
         $this->ticket_category_id = $ticket_category_id;
     }
 
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'code':
+                return $this->code;
+            case 'ticket_category_id':
+                return $this->ticket_category_id;
+        }
+    }
+
     public function getString(): string
     {
-        return $this->code . "::" . $this->ticket_category_id;
+        return $this->code->getString() . "::" . $this->ticket_category_id->getString();
     }
 }

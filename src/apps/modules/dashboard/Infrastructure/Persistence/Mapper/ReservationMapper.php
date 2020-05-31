@@ -40,6 +40,7 @@ class ReservationMapper
             $ticket_record = new TicketRecord();
             $ticket_record->code = $ticket->code->getString();
             $ticket_record->id_ticket_category = $ticket->ticket_category_id->getString();
+            $ticket_record->id_reservation = $reservation->id->getString();
             $ticket_records[] = $ticket_record;
         }
         return $ticket_records;
