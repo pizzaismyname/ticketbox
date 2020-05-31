@@ -20,7 +20,7 @@ class EditTicketCategoryService
 
     public function execute(EditTicketCategoryRequest $request)
     {
-        $ticket_category = $this->ticket_category_repo->find(new TicketCategoryID($request->ticket_categoryee_id));
+        $ticket_category = $this->ticket_category_repo->find(new TicketCategoryID($request->ticket_category_id));
 
         if ($request->type != null) {
             $ticket_category->changeType(new Type($request->type));

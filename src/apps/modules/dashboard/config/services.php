@@ -2,9 +2,14 @@
 
 use Its\Example\Dashboard\Core\Application\Service\LoginService;
 use Its\Example\Dashboard\Core\Application\Service\CreateCommitteeService;
-use Its\Example\Dashboard\Core\Application\Service\CreateReservationService;
 use Its\Example\Dashboard\Core\Application\Service\EditCommitteeService;
 use Its\Example\Dashboard\Core\Application\Service\DeleteCommitteeService;
+use Its\Example\Dashboard\Core\Application\Service\CreateTicketCategoryService;
+use Its\Example\Dashboard\Core\Application\Service\ListTicketCategoryService;
+use Its\Example\Dashboard\Core\Application\Service\EditTicketCategoryService;
+use Its\Example\Dashboard\Core\Application\Service\DeleteTicketCategoryService;
+use Its\Example\Dashboard\Core\Application\Service\ViewTicketCategoryService;
+use Its\Example\Dashboard\Core\Application\Service\CreateReservationService;
 use Its\Example\Dashboard\Core\Application\Service\DeleteReservationService;
 use Its\Example\Dashboard\Core\Application\Service\VerifyReservationService;
 use Its\Example\Dashboard\Core\Application\Service\ViewReservationStatusService;
@@ -70,12 +75,20 @@ $di->set('createTicketCategoryService', function () use ($di) {
     return new CreateTicketCategoryService($di->get('ticketCategoryRepository'));
 });
 
+$di->set('listTicketCategoryService', function () use ($di) {
+    return new ListTicketCategoryService($di->get('ticketCategoryRepository'));
+});
+
 $di->set('editTicketCategoryService', function () use ($di) {
     return new EditTicketCategoryService($di->get('ticketCategoryRepository'));
 });
 
 $di->set('deleteTicketCategoryService', function () use ($di) {
     return new DeleteTicketCategoryService($di->get('ticketCategoryRepository'));
+});
+
+$di->set('viewTicketCategoryService', function () use ($di) {
+    return new ViewTicketCategoryService($di->get('ticketCategoryRepository'));
 });
 
 $di->set('createReservationService', function () use ($di) {

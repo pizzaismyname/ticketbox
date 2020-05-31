@@ -2,11 +2,12 @@
 
 namespace Its\Example\Dashboard\Core\Application\Service;
 
-use Its\Example\Dashboard\Core\Application\Request\DeleteTicketCategoryRequest;
+use Its\Example\Dashboard\Core\Application\Request\ViewTicketCategoryRequest;
+use Its\Example\Dashboard\Core\Application\Response\TicketCategoryInfo;
 use Its\Example\Dashboard\Core\Domain\Interfaces\ITicketCategoryRepository;
 use Its\Example\Dashboard\Core\Domain\Model\TicketCategory\TicketCategoryID;
 
-class DeleteTicketCategoryService
+class ViewTicketCategoryService
 {
     protected $ticket_category_repo;
 
@@ -15,9 +16,9 @@ class DeleteTicketCategoryService
         $this->ticket_category_repo = $ticket_category_repo;
     }
 
-    public function execute(DeleteTicketCategoryRequest $request)
+    public function execute(ViewTicketCategoryRequest $request): TicketCategoryInfo
     {
         $ticket_category = $this->ticket_category_repo->find(new TicketCategoryID($request->ticket_category_id));
-        $this->ticket_category_repo->delete($ticket_category);
+        return new TicketCategoryInfo($ticket_category);
     }
 }

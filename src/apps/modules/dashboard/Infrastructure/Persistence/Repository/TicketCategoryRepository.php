@@ -35,6 +35,18 @@ class TicketCategoryRepository implements ITicketCategoryRepository
         return TicketCategoryMapper::toModel($ticket_category_record);
     }
 
+    public function all(): array
+    {
+        $ticket_category_records = TicketCategoryRecord::find();
+
+        $ticket_categories = [];
+        foreach ($ticket_category_records as $ticket_category_record) {
+            $ticket_categories[] = TicketCategoryMapper::toModel($ticket_category_record);
+        }
+
+        return $ticket_categories;
+    }
+
     public function persist(TicketCategory $ticket_category)
     {
         $ticket_category_record = TicketCategoryMapper::toTicketCategoryRecord($ticket_category);
