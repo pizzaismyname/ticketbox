@@ -2,10 +2,15 @@
 
 use Its\Example\Dashboard\Core\Application\Service\LoginService;
 use Its\Example\Dashboard\Core\Application\Service\CreateCommitteeService;
+use Its\Example\Dashboard\Core\Application\Service\CreateReservationService;
 use Its\Example\Dashboard\Core\Application\Service\EditCommitteeService;
 use Its\Example\Dashboard\Core\Application\Service\DeleteCommitteeService;
+use Its\Example\Dashboard\Core\Application\Service\DeleteReservationService;
+use Its\Example\Dashboard\Core\Application\Service\VerifyReservationService;
+use Its\Example\Dashboard\Core\Application\Service\ViewReservationStatusService;
 use Its\Example\Dashboard\Infrastructure\Persistence\Repository\CommitteeRepository;
 use Its\Example\Dashboard\Infrastructure\Persistence\Repository\TicketCategoryRepository;
+use Its\Example\Dashboard\Infrastructure\Persistence\Repository\ReservationRepository;
 use Phalcon\Di\DiInterface;
 use Phalcon\Mvc\View;
 
@@ -18,7 +23,7 @@ $di['view'] = function () {
         [
             ".volt" => "voltService",
         ]
-        );
+    );
 
     return $view;
 };
@@ -39,6 +44,10 @@ $di->set('committeeRepository', function () use ($di) {
 
 $di->set('ticketCategoryRepository', function () use ($di) {
     return new TicketCategoryRepository($di);
+});
+
+$di->set('reservationRepository', function () use ($di) {
+    return new ReservationRepository($di);
 });
 
 $di->set('loginService', function () use ($di) {
@@ -67,4 +76,20 @@ $di->set('editTicketCategoryService', function () use ($di) {
 
 $di->set('deleteTicketCategoryService', function () use ($di) {
     return new DeleteTicketCategoryService($di->get('ticketCategoryRepository'));
+});
+
+$di->set('createReservationService', function () use ($di) {
+    return new CreateReservationService($di->get('reservationRepository'), $di->get('ticketCategoryRepository'));
+});
+
+$di->set('deleteReservationService', function () use ($di) {
+    return new DeleteReservationService($di->get('reservationRepository'));
+});
+
+$di->set('createReservationService', function () use ($di) {
+    return new VerifyReservationService($di->get('reservationRepository'), $di->get('committeeRepository'));
+});
+
+$di->set('viewReservationStatusService', function () use ($di) {
+    return new ViewReservationStatusService($di->get('reservationRepository'));
 });

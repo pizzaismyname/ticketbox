@@ -73,12 +73,4 @@ class Reservation
         $this->status = self::STAT_VERIFIED;
         $this->committee = $committee;
     }
-
-    // gak nang kene - nang app service
-    // trus di find trs delet nng repo kyk delet biasane
-    public function setCancellation()
-    {
-        // sisa tiket di kategori tsb nambah lagi - kan di count pris - :D
-        // tiket dgn id reservasi tsb di delete
-    }
 }
