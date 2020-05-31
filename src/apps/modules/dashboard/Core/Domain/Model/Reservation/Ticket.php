@@ -4,6 +4,11 @@ namespace Its\Example\Dashboard\Core\Domain\Model\Reservation;
 
 use Its\Example\Dashboard\Core\Domain\Model\TicketCategory\TicketCategoryID;
 
+/**
+ * @property-read TicketCode $code
+ * @property-read TicketCategoryID $ticket_category_id
+ */
+
 class Ticket
 {
     protected $code;

@@ -2,6 +2,11 @@
 
 namespace Its\Example\Dashboard\Core\Domain\Model\Reservation;
 
+/**
+ * @property-read CustomerName $name
+ * @property-read CustomerEmail $email
+ */
+
 class Customer
 {
     protected $name;

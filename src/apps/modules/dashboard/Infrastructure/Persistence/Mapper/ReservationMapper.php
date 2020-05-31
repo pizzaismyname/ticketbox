@@ -33,6 +33,18 @@ class ReservationMapper
         return $reservation_record;
     }
 
+    public static function toTicketRecord(Reservation $reservation): array
+    {
+        $ticket_records = [];
+        foreach ($reservation->tickets as $ticket) {
+            $ticket_record = new TicketRecord();
+            $ticket_record->code = $ticket->code->getString();
+            $ticket_record->id_ticket_category = $ticket->ticket_category_id->getString();
+            $ticket_records[] = $ticket_record;
+        }
+        return $ticket_records;
+    }
+
     public static function toModel(ReservationRecord $reservation_record, ICommitteeRepository $committee_repo): Reservation
     {
         $ticket_records = $reservation_record->tickets;
@@ -41,10 +53,7 @@ class ReservationMapper
         $tickets = [];
         foreach ($ticket_records as $ticket_record) {
             /** @var TicketRecord $ticket_record */
-            $tickets[] = new Ticket(
-                new TicketCode($ticket_record->code),
-                new TicketCategoryID($ticket_record->id_ticket_category)
-            );
+            $tickets[] = new Ticket(new TicketCode($ticket_record->code), new TicketCategoryID($ticket_record->id_ticket_category));
         }
 
         if ($reservation_record->id_committee == NULL) {

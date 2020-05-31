@@ -60,10 +60,11 @@ class Reservation
         while ($input_amount > 0) {
             if ($input_ticket_category->isZero()) {
                 throw new Exception;
+            } else {
+                $reserved_ticket = $input_ticket_category->generateTicket();
+                $this->tickets[] = $reserved_ticket;
+                $input_amount--;
             }
-            $reserved_ticket = $input_ticket_category->generateTicket();
-            $this->tickets[] = $reserved_ticket;
-            $input_amount--;
         }
     }
 

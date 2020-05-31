@@ -41,11 +41,17 @@ class ReservationRepository implements IReservationRepository
     {
         $reservation_record = ReservationMapper::toReservationRecord($reservation);
         $reservation_record->save();
+
+        $reserved_tickets = ReservationMapper::toTicketRecord($reservation);
+        foreach ($reserved_tickets as $reserved_ticket) {
+            $reserved_ticket->save();
+        }
     }
 
     public function delete(Reservation $reservation)
     {
         $reservation_record = ReservationMapper::toReservationRecord($reservation);
+        $reservation_record->tickets->delete();
         $reservation_record->delete();
     }
 }
