@@ -36,7 +36,7 @@
 							</li>
 							<li>
 								<a class="nav-link" href="/reservation/index">
-									Manage Reservationss
+									Manage Reservations
 								</a>
 							</li>
 						{% endif %}
