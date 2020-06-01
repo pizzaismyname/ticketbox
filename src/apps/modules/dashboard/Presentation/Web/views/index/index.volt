@@ -27,8 +27,16 @@
 		</div>
 	{% else %}
 		<br>
-		<a class="btn btn-outline-dark" href="/reservation/create">
-			Reserve Ticket
-		</a>
+		<div>
+			<a class="btn btn-outline-dark" href="/reservation/create">
+				Reserve Ticket
+			</a>
+		</div>
+		<br>
+		<div>
+			<a class="btn btn-outline-dark" href="/reservation/view">
+				View Ticket
+			</a>
+		</div>
 	{% endif %}
 {% endblock %}

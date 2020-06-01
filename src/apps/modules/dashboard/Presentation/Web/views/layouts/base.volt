@@ -52,9 +52,16 @@
 								</div>
 							</li>
 						{% else %}
-							<a class="btn btn-outline-light" href="/reservation/create">
-								Reserve Now!
-							</a>
+							<li class="nav-link">
+								<a class="btn btn-outline-light" href="/reservation/view">
+									Check Reservation
+								</a>
+							</li>
+							<li class="nav-link">
+								<a class="btn btn-outline-light" href="/reservation/create">
+									Reserve Now!
+								</a>
+							</li>
 						{% endif %}
 					</ul>
 				</div>
