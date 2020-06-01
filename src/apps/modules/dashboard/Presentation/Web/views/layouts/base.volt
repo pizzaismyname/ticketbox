@@ -23,7 +23,22 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto"></ul>
-					<ul class="navbar-nav ml-auto"></ul>
+					<ul class="navbar-nav ml-auto">
+						{% if session.has('committee_info') %}
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{ committee_info.username }}
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="/logout">Logout</a>
+								</div>
+							</li>
+						{% else %}
+							<a class="btn btn-outline-light" href="/reservation/create">
+								Reserve Now!
+							</a>
+						{% endif %}
+					</ul>
 				</div>
 			</div>
 		</nav>
