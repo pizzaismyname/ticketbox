@@ -4,7 +4,7 @@
 	<h1>Committee Login</h1>
 	<form method="POST" action="/login">
 		<div class="form-group">
-			<input type="username" class="form-control" name="username" placeholder="username">
+			<input type="text" class="form-control" name="username" placeholder="username">
 		</div>
 		<div class="form-group">
 			<input type="password" class="form-control" name="password" placeholder="password">
