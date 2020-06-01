@@ -4,7 +4,7 @@
 	{% if session.has('committee_info') %}
 		<br>
 		<div>
-			Hello, COBA
+			Hello,
 			{{ committee_info.username }}
 		</div>
 		<br>
