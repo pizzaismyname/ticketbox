@@ -2,9 +2,33 @@
 
 {% block content %}
 	{% if session.has('committee_info') %}
-		{{ committee_info.username }}
+		<br>
 		<div>
-			<a class="btn btn-danger" href="/logout">Logout</a>
+			Hello,
+			{{ committee_info.username }}
 		</div>
+		<br>
+		<div>
+			<a class="btn btn-outline-dark" href="/committee/index">
+				Manage Committees
+			</a>
+		</div>
+		<br>
+		<div>
+			<a class="btn btn-outline-dark" href="/ticketcategory/index">
+				Manage Ticket Categories
+			</a>
+		</div>
+		<br>
+		<div>
+			<a class="btn btn-outline-dark" href="/reservation/index">
+				Manage Reservations
+			</a>
+		</div>
+	{% else %}
+		<br>
+		<a class="btn btn-outline-dark" href="/reservation/create">
+			Reserve Ticket
+		</a>
 	{% endif %}
 {% endblock %}
