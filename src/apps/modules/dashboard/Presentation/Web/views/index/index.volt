@@ -2,9 +2,12 @@
 
 {% block content %}
 	{% if session.has('committee_info') %}
+		Hello,
 		{{ committee_info.username }}
-		<div>
-			<a class="btn btn-danger" href="/logout">Logout</a>
-		</div>
+	{% else %}
+		<br>
+		<a class="btn btn-outline-dark" href="/reservation/create">
+			Reserve Ticket
+		</a>
 	{% endif %}
 {% endblock %}
