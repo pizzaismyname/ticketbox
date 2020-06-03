@@ -14,8 +14,6 @@ class LoginController extends Controller
     {
         /** @var LoginService */
         $this->login_service = $this->di->get('loginService');
-        $this->view->setVar('committee_info', $this->session->get('committee_info'));
-
     }
 
     public function indexAction()
