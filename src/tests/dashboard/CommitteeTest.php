@@ -9,24 +9,31 @@ use Ramsey\Uuid\Uuid;
 
 class CommitteeTest extends TestCase
 {
-    public function testCanBeCreated()
+    public function testCommitteeCanBeCreated()
     {
         $committee = Committee::create("testusername", "testpassword");
 
         $this->assertInstanceOf(Committee::class, $committee);
     }
 
-    public function testCanBeInstantiated()
+    public function testCommitteeCanBeInstantiated()
     {
-        $committee = new Committee(new CommitteeID(Uuid::uuid4()->toString()), new Username("testusername"), Password::createFromString("anypassword"));
+        $committee = new Committee(
+            new CommitteeID(Uuid::uuid4()->toString()),
+            new Username("testusername"),
+            Password::createFromString("anypassword")
+        );
 
         $this->assertInstanceOf(Committee::class, $committee);
     }
 
-    public function testPasswordCanBeChanged()
+    public function testCommitteePasswordCanBeChanged()
     {
-        $committee = new Committee(CommitteeID::generate(), new Username("testusername"), Password::createFromString("anypassword"));
-
+        $committee = new Committee(
+            CommitteeID::generate(),
+            new Username("testusername"),
+            Password::createFromString("anypassword")
+        );
         $committee->changePassword("anypassword", Password::createFromString("anotherpassword"));
 
         $this->assertEquals(true, $committee->password->testAgainst("anotherpassword"));

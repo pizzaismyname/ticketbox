@@ -34,9 +34,11 @@ class CommitteeRepositoryTest extends TestCase
         $this->expectException(NotFoundException::class);
 
         $committee = self::$repo->find(new CommitteeID('e9d235aa-a7c0-4887-9e16-45af0d213cf4'));
-        self::$repo->delete($committee);
         $committee2 = self::$repo->find(new CommitteeID('03e72c50-d385-4625-ac4d-f8ba9741e337'));
+
+        self::$repo->delete($committee);
         self::$repo->delete($committee2);
+
         $committee = self::$repo->find(new CommitteeID('e9d235aa-a7c0-4887-9e16-45af0d213cf4'));
         $committee2 = self::$repo->find(new CommitteeID('03e72c50-d385-4625-ac4d-f8ba9741e337'));
     }

@@ -22,32 +22,52 @@ use Ramsey\Uuid\Uuid;
 
 class ReservationTest extends TestCase
 {
-    public function testCanBeCreated()
+    public function testReservationCanBeCreated()
     {
         $reservation = Reservation::create("testcustomername", "test.customer@email.com");
 
         $this->assertInstanceOf(Reservation::class, $reservation);
-
         $this->assertEquals(true, $reservation->status == Reservation::STAT_PENDING);
-
         $this->assertEquals(true, $reservation->tickets == []);
-
         $this->assertEquals(true, $reservation->committee == NULL);
     }
 
-    public function testCanBeInstantiated()
+    public function testReservationCanBeInstantiated()
     {
-        $reservation = new Reservation(new ReservationID(Uuid::uuid4()->toString()), Reservation::STAT_PENDING, [], new Customer(new CustomerName("testcustomername"), new CustomerEmail("test.customer@email.com")), NULL);
+        $reservation = new Reservation(
+            new ReservationID(Uuid::uuid4()->toString()),
+            Reservation::STAT_PENDING,
+            [],
+            new Customer(
+                new CustomerName("testcustomername"),
+                new CustomerEmail("test.customer@email.com")
+            ),
+            NULL
+        );
 
         $this->assertInstanceOf(Reservation::class, $reservation);
     }
 
     public function testTicketCanBeReserved()
     {
-        $ticket_category = new TicketCategory(new TicketCategoryID(Uuid::uuid4()->toString()), new Type("testtype"), new Price(50000), new TotalAmount(100), new RemainingAmount(100));
+        $ticket_category = new TicketCategory(
+            new TicketCategoryID(Uuid::uuid4()->toString()),
+            new Type("testtype"),
+            new Price(50000),
+            new TotalAmount(100),
+            new RemainingAmount(100)
+        );
 
-        $reservation = new Reservation(new ReservationID(Uuid::uuid4()->toString()), Reservation::STAT_PENDING, [], new Customer(new CustomerName("testcustomername"), new CustomerEmail("test.customer@email.com")), NULL);
-
+        $reservation = new Reservation(
+            new ReservationID(Uuid::uuid4()->toString()),
+            Reservation::STAT_PENDING,
+            [],
+            new Customer(
+                new CustomerName("testcustomername"),
+                new CustomerEmail("test.customer@email.com")
+            ),
+            NULL
+        );
         $reservation->reserveTicket(10, $ticket_category);
 
         $this->assertEquals(true, $ticket_category->remaining_amount == new RemainingAmount(100));
@@ -55,18 +75,34 @@ class ReservationTest extends TestCase
 
     public function testReservationVerified()
     {
-        $ticket_category = new TicketCategory(new TicketCategoryID(Uuid::uuid4()->toString()), new Type("testtype"), new Price(50000), new TotalAmount(100), new RemainingAmount(100));
+        $ticket_category = new TicketCategory(
+            new TicketCategoryID(Uuid::uuid4()->toString()),
+            new Type("testtype"),
+            new Price(50000),
+            new TotalAmount(100),
+            new RemainingAmount(100)
+        );
 
-        $reservation = new Reservation(new ReservationID(Uuid::uuid4()->toString()), Reservation::STAT_PENDING, [], new Customer(new CustomerName("testcustomername"), new CustomerEmail("test.customer@email.com")), NULL);
-
-        $committee = new Committee(new CommitteeID(Uuid::uuid4()->toString()), new Username("testusername"), Password::createFromString("anypassword"));
-
+        $reservation = new Reservation(
+            new ReservationID(Uuid::uuid4()->toString()),
+            Reservation::STAT_PENDING,
+            [],
+            new Customer(
+                new CustomerName("testcustomername"),
+                new CustomerEmail("test.customer@email.com")
+            ),
+            NULL
+        );
         $reservation->reserveTicket(10, $ticket_category);
 
+        $committee = new Committee(
+            new CommitteeID(Uuid::uuid4()->toString()),
+            new Username("testusername"),
+            Password::createFromString("anypassword")
+        );
         $reservation->setVerificationByCommittee($committee);
 
         $this->assertEquals(true, $reservation->status == Reservation::STAT_VERIFIED);
-
         $this->assertEquals(true, $reservation->committee == $committee);
     }
 }

@@ -23,8 +23,7 @@ class ReservationRepositoryTest extends TestCase
 
     public function testCanBePersisted()
     {
-        $reservation = new Reservation(new ReservationID('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'), Reservation::STAT_PENDING, [], new Customer(new CustomerName("testcustomername"), new CustomerEmail("test.customer@email.com")), NULL);
-
+        $reservation = new Reservation(new ReservationID('61435b5d-389f-4241-85f9-1c50d36a1c98'), Reservation::STAT_PENDING, [], new Customer(new CustomerName("testcustomername"), new CustomerEmail("test.customer@email.com")), NULL);
         self::$repo->persist($reservation);
     }
 
@@ -32,8 +31,9 @@ class ReservationRepositoryTest extends TestCase
     {
         $this->expectException(NotFoundException::class);
 
-        $reservation = self::$repo->find(new ReservationID('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'));
+        $reservation = self::$repo->find(new ReservationID('61435b5d-389f-4241-85f9-1c50d36a1c98'));
         self::$repo->delete($reservation);
-        $reservation = self::$repo->find(new ReservationID('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'));
+
+        $reservation = self::$repo->find(new ReservationID('61435b5d-389f-4241-85f9-1c50d36a1c98'));
     }
 }
