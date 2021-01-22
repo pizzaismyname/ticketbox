@@ -24,7 +24,7 @@ class TicketCategoryRepositoryTest extends TestCase
 
     public function testCanBePersisted()
     {
-        $ticket_category = new TicketCategory(new TicketCategoryID('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'), new Type('Regular'), new Price('150000'), new TotalAmount('100'), new RemainingAmount('0'));
+        $ticket_category = new TicketCategory(new TicketCategoryID('05437499-1f08-4814-90b4-5129a6d69720'), new Type('Regular'), new Price('150000'), new TotalAmount('100'), new RemainingAmount('0'));
 
         self::$repo->persist($ticket_category);
     }
@@ -33,8 +33,9 @@ class TicketCategoryRepositoryTest extends TestCase
     {
         $this->expectException(NotFoundException::class);
 
-        $ticket_category = self::$repo->find(new TicketCategoryID('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'));
+        $ticket_category = self::$repo->find(new TicketCategoryID('05437499-1f08-4814-90b4-5129a6d69720'));
         self::$repo->delete($ticket_category);
-        $ticket_category = self::$repo->find(new TicketCategoryID('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'));
+
+        $ticket_category = self::$repo->find(new TicketCategoryID('05437499-1f08-4814-90b4-5129a6d69720'));
     }
 }
