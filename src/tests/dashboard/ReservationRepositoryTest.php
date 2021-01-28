@@ -23,7 +23,7 @@ class ReservationRepositoryTest extends TestCase
 
     public function testCanBePersisted()
     {
-        $reservation = new Reservation(new ReservationID('61435b5d-389f-4241-85f9-1c50d36a1c98'), Reservation::STAT_PENDING, [], new Customer(new CustomerName("testcustomername"), new CustomerEmail("test.customer@email.com")), NULL);
+        $reservation = new Reservation(new ReservationID('61435b5d-389f-4241-85f9-1c50d36a1c98'), Reservation::STATUS_PENDING, [], new Customer(new CustomerName("testcustomername"), new CustomerEmail("test.customer@email.com")), NULL);
         self::$repo->persist($reservation);
     }
 

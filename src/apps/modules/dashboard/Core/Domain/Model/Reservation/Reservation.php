@@ -21,12 +21,12 @@ class Reservation
     protected $customer;
     protected $committee;
 
-    const STAT_PENDING = "PENDING";
-    const STAT_VERIFIED = "VERIFIED";
+    const STATUS_PENDING = "PENDING";
+    const STATUS_VERIFIED = "VERIFIED";
 
     public static function create(string $customer_name, string $customer_email): Reservation
     {
-        return new Reservation(ReservationID::generate(), self::STAT_PENDING, [], new Customer(new CustomerName($customer_name), new CustomerEmail($customer_email)), NULL);
+        return new Reservation(ReservationID::generate(), self::STATUS_PENDING, [], new Customer(new CustomerName($customer_name), new CustomerEmail($customer_email)), NULL);
     }
 
     /** @param Ticket[] $tickets */
@@ -70,7 +70,7 @@ class Reservation
 
     public function setVerificationByCommittee(Committee $committee)
     {
-        $this->status = self::STAT_VERIFIED;
+        $this->status = self::STATUS_VERIFIED;
         $this->committee = $committee;
     }
 }

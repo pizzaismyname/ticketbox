@@ -27,7 +27,7 @@ class ReservationTest extends TestCase
         $reservation = Reservation::create("testcustomername", "test.customer@email.com");
 
         $this->assertInstanceOf(Reservation::class, $reservation);
-        $this->assertEquals(true, $reservation->status == Reservation::STAT_PENDING);
+        $this->assertEquals(true, $reservation->status == Reservation::STATUS_PENDING);
         $this->assertEquals(true, $reservation->tickets == []);
         $this->assertEquals(true, $reservation->committee == NULL);
     }
@@ -36,7 +36,7 @@ class ReservationTest extends TestCase
     {
         $reservation = new Reservation(
             new ReservationID(Uuid::uuid4()->toString()),
-            Reservation::STAT_PENDING,
+            Reservation::STATUS_PENDING,
             [],
             new Customer(
                 new CustomerName("testcustomername"),
@@ -60,7 +60,7 @@ class ReservationTest extends TestCase
 
         $reservation = new Reservation(
             new ReservationID(Uuid::uuid4()->toString()),
-            Reservation::STAT_PENDING,
+            Reservation::STATUS_PENDING,
             [],
             new Customer(
                 new CustomerName("testcustomername"),
@@ -73,7 +73,7 @@ class ReservationTest extends TestCase
         $this->assertEquals(true, $ticket_category->remaining_amount == new RemainingAmount(100));
     }
 
-    public function testReservationVerified()
+    public function testReservationCanBeVerified()
     {
         $ticket_category = new TicketCategory(
             new TicketCategoryID(Uuid::uuid4()->toString()),
@@ -85,7 +85,7 @@ class ReservationTest extends TestCase
 
         $reservation = new Reservation(
             new ReservationID(Uuid::uuid4()->toString()),
-            Reservation::STAT_PENDING,
+            Reservation::STATUS_PENDING,
             [],
             new Customer(
                 new CustomerName("testcustomername"),
@@ -102,7 +102,7 @@ class ReservationTest extends TestCase
         );
         $reservation->setVerificationByCommittee($committee);
 
-        $this->assertEquals(true, $reservation->status == Reservation::STAT_VERIFIED);
+        $this->assertEquals(true, $reservation->status == Reservation::STATUS_VERIFIED);
         $this->assertEquals(true, $reservation->committee == $committee);
     }
 }

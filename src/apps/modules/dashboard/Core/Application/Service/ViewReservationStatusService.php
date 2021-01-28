@@ -21,9 +21,9 @@ class ViewReservationStatusService
     public function execute(ViewReservationStatusRequest $request): ?array
     {
         $reservation = $this->reservation_repo->find(new ReservationID($request->reservation_id));
-        if ($reservation->status == Reservation::STAT_PENDING) {
+        if ($reservation->status == Reservation::STATUS_PENDING) {
             return NULL;
-        } elseif ($reservation->status == Reservation::STAT_VERIFIED) {
+        } elseif ($reservation->status == Reservation::STATUS_VERIFIED) {
             $tickets = [];
             foreach ($reservation->tickets as $ticket) {
                 $ticket_info = new TicketInfo($ticket);
